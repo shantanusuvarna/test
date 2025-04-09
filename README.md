@@ -1,4 +1,4 @@
-# 📊 PySpark ETL Pipeline
+PySpark ETL Pipeline
 
 This project implements a containerized ETL pipeline using **Apache Spark**, **PostgreSQL**, **Docker**, and **Poetry**. It extracts customer transaction data from a CSV file, performs transformations using **PySpark**, and loads the final results into a **PostgreSQL** database.
 
