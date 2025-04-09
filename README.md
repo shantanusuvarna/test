@@ -130,10 +130,3 @@ Dependencies are managed with **Poetry** and listed in `pyproject.toml`:
 - `pytest`
 - `pandas`
 
-To install locally (optional):
-
-```bash
-poetry install
-```
-
----
