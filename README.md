@@ -6,7 +6,7 @@ This project implements a containerized ETL pipeline using **Apache Spark**, **P
 
 ## 🗂️ Project Structure
 
-\`\`\`
+```
 .
 ├── Dockerfile                  # Defines the ETL container environment
 ├── docker-compose.yml         # Orchestrates services: Spark, PostgreSQL, ETL
@@ -19,44 +19,43 @@ This project implements a containerized ETL pipeline using **Apache Spark**, **P
 ├── tests/                     # Unit and integration tests
 │   ├── test_transform.py      # Unit test for transformation logic
 │   └── test_integration.py    # Full pipeline test using dummy CSV
-\`\`\`
+```
 
 ---
 
 ## 🚀 Setup Instructions
 
-### 🔹 1. Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone <your-repo-url>
 cd <your-repo>
 ```
 
-### 🔹 2. Add Your Data
+### 2. Add Your Data
 
 Place your source CSV file (pipe-delimited with the following headers) into the `data/` folder:
 
-\`\`\`text
+```text
 custid|transactiondate|productsold|unitssold
-\`\`\`
+```
 
 ---
 
 ## 🐳 Running the Pipeline with Docker Compose
 
-### 🔹 1. Build and Start All Services
+### 1. Build and Start All Services
 
 ```bash
 docker-compose up --build
 ```
 
 This starts the following services:
-
 - **Spark master and worker** (Bitnami Spark 3.3.2)
 - **PostgreSQL** database (`warehouse`)
 - **ETL container** (paused until command is issued)
 
-### 🔹 2. Execute the ETL Job
+### 2. Execute the ETL Job
 
 Access the running ETL container:
 
@@ -78,25 +77,25 @@ python main.py --source /app/data/your_file.csv --table customers
 
 These are set in the `docker-compose.yml` and can also be overridden via `.env`:
 
-| Variable            | Default                    | Description                        |
-|---------------------|----------------------------|------------------------------------|
-| `POSTGRES_DB`       | `warehouse`                | Target PostgreSQL database         |
-| `POSTGRES_USER`     | `postgres`                 | PostgreSQL username                |
-| `POSTGRES_PASSWORD` | `mypassword`               | PostgreSQL password                |
-| `POSTGRES_HOST`     | `db`                       | Hostname for PostgreSQL service    |
-| `SPARK_MASTER`      | `spark://spark-master:7077`| Spark master cluster URL           |
+| Variable            | Default                     | Description                        |
+|---------------------|-----------------------------|------------------------------------|
+| `POSTGRES_DB`       | `warehouse`                 | Target PostgreSQL database         |
+| `POSTGRES_USER`     | `postgres`                  | PostgreSQL username                |
+| `POSTGRES_PASSWORD` | `mypassword`                | PostgreSQL password                |
+| `POSTGRES_HOST`     | `db`                        | Hostname for PostgreSQL service    |
+| `SPARK_MASTER`      | `spark://spark-master:7077` | Spark master cluster URL           |
 
 ---
 
 ## 🧪 Running Tests
 
-### 🔹 Unit Test (Transform Logic)
+### Unit Test (Transform Logic)
 
 ```bash
 pytest tests/test_transform.py
 ```
 
-### 🔹 Integration Test (Full Pipeline with Dummy CSV)
+### Integration Test (Full Pipeline with Dummy CSV)
 
 ```bash
 pytest tests/test_integration.py
@@ -114,11 +113,11 @@ pytest tests/test_integration.py
   - Computes `longest_streak` of consecutive daily purchases.
 - **Load**: Writes the final DataFrame into a PostgreSQL table with schema:
 
-| Column             | Description                                                  |
-|--------------------|--------------------------------------------------------------|
-| `customer_id`      | Mapped from `custid`                                         |
-| `favourite_product`| Product with the highest total `unitsSold` per customer      |
-| `longest_streak`   | Longest consecutive-day streak of purchases                  |
+| Column              | Description                                              |
+|---------------------|----------------------------------------------------------|
+| `customer_id`       | Mapped from `custid`                                     |
+| `favourite_product` | Product with the highest total `unitsSold` per customer  |
+| `longest_streak`    | Longest consecutive-day streak of purchases              | 
 
 ---
 
