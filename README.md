@@ -63,16 +63,10 @@ This starts the following services:
 
 ### 2. Execute the ETL Job
 
-Access the running ETL container:
+Accessing and running the ETL script inside the container:
 
 ```bash
-docker compose exec etl 
-```
-
-Run the ETL script inside the container:
-
-```bash
-python main.py --source /app/data/<file_name>.csv --table customers
+docker compose exec etl python main.py --source /app/data/<file_name>.csv --table customers
 ```
 
 > Replace `file_name` with the actual filename placed in `/data`.
