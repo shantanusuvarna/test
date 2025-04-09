@@ -4,7 +4,7 @@ This project implements a containerized ETL pipeline using **Apache Spark**, **P
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 .
@@ -23,7 +23,7 @@ This project implements a containerized ETL pipeline using **Apache Spark**, **P
 
 ---
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### 1. Clone the Repository
 
@@ -42,7 +42,7 @@ custid|transactiondate|productsold|unitssold
 
 ---
 
-## 🐳 Running the Pipeline with Docker Compose
+## Running the Pipeline with Docker Compose
 
 ### 1. Build and Start All Services
 
@@ -73,7 +73,7 @@ python main.py --source /app/data/your_file.csv --table customers
 
 ---
 
-## ⚙️ Configurable Environment Variables
+## Configurable Environment Variables
 
 These are set in the `docker-compose.yml` and can also be overridden via `.env`:
 
@@ -87,7 +87,7 @@ These are set in the `docker-compose.yml` and can also be overridden via `.env`:
 
 ---
 
-## 🧪 Running Tests
+## Running Tests
 
 ### Unit Test (Transform Logic)
 
@@ -105,7 +105,7 @@ pytest tests/test_integration.py
 
 ---
 
-## 🔁 What the ETL Pipeline Does
+## What the ETL Pipeline Does
 
 - **Extract**: Loads transactional data from a pipe-delimited CSV.
 - **Transform**:
@@ -121,7 +121,7 @@ pytest tests/test_integration.py
 
 ---
 
-## 📦 Dependencies
+## Dependencies
 
 Dependencies are managed with **Poetry** and listed in `pyproject.toml`:
 
@@ -137,8 +137,3 @@ poetry install
 ```
 
 ---
-
-## 📬 Contact / License
-
-MIT License • Developed for Sertis Data Engineering Take-Home Test  
-Feel free to contribute or reach out with questions!
