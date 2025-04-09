@@ -1,4 +1,4 @@
-## PySpark ETL Pipeline
+## etl_pipeline_assignment_shantanu
 
 This project implements a containerized ETL pipeline using **Apache Spark**, **PostgreSQL**, **Docker**, and **Poetry**. It extracts customer transaction data from a CSV file, performs transformations using **PySpark**, and loads the final results into a **PostgreSQL** database.
 
@@ -8,17 +8,21 @@ This project implements a containerized ETL pipeline using **Apache Spark**, **P
 
 ```
 .
-├── Dockerfile                  # Defines the ETL container environment
-├── docker-compose.yml         # Orchestrates services: Spark, PostgreSQL, ETL
-├── main.py                    # Entry point for the ETL job
-├── pyproject.toml             # Poetry-managed dependencies
-├── etl/                       # Python module for transformation logic
-│   ├── __init__.py            # Marks this directory as a Python package
-│   └── transformations.py     # Core transformation logic
-├── data/                      # Folder to store source CSV files
-├── tests/                     # Unit and integration tests
-│   ├── test_transform.py      # Unit test for transformation logic
-│   └── test_integration.py    # Full pipeline test using dummy CSV
+├── Dockerfile
+├── docker-compose.yml
+├── .dockerignore
+├── main.py
+├── pyproject.toml
+├── etl/
+│   ├── __init__.py
+│   └── transformations.py
+├── data/
+│   ├── transaction.csv           
+│   └── dummy_transactions.csv    
+├── tests/
+│   ├── test_transform.py
+│   └── test_integration.py
+└── docs/                         
 ```
 
 ---
@@ -33,6 +37,8 @@ cd <your-repo>
 ```
 
 ### 2. Add Your Data
+
+transaction.csv and dummy_transactions.csv files are already included.
 
 Place your source CSV file (pipe-delimited with the following headers) into the `data/` folder:
 
@@ -60,16 +66,16 @@ This starts the following services:
 Access the running ETL container:
 
 ```bash
-docker exec -it etl bash
+docker compose exec etl 
 ```
 
 Run the ETL script inside the container:
 
 ```bash
-python main.py --source /app/data/your_file.csv --table customers
+python main.py --source /app/data/<file_name>.csv --table customers
 ```
 
-> Replace `your_file.csv` with the actual filename placed in `/data`.
+> Replace `file_name` with the actual filename placed in `/data`.
 
 ---
 
@@ -92,16 +98,17 @@ These are set in the `docker-compose.yml` and can also be overridden via `.env`:
 ### Unit Test (Transform Logic)
 
 ```bash
-pytest tests/test_transform.py
+docker compose exec etl pytest tests/test_transformations.py
 ```
 
 ### Integration Test (Full Pipeline with Dummy CSV)
 
 ```bash
-pytest tests/test_integration.py
+docker compose exec etl pytest tests/test_etl_integration.py
 ```
 
 > Ensure that a dummy input file is available in `data/` for the integration test.
+> 1 dummy file (dummy_transactions.csv) already exists in app/data/ 
 
 ---
 
@@ -120,6 +127,12 @@ pytest tests/test_integration.py
 | `longest_streak`    | Longest consecutive-day streak of purchases              | 
 
 ---
+
+## Database Query to verify
+
+```bash
+docker compose exec db psql --user postgres -d warehouse -c 'select * from customers limit 10'
+```
 
 ## Dependencies
 
