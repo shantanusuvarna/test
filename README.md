@@ -125,7 +125,7 @@ docker compose exec etl pytest tests/test_etl_integration.py
 ## Database Query to verify
 
 ```bash
-docker compose exec db psql --user postgres -d warehouse -c 'select * from customers limit 10'
+docker compose exec db psql --user postgres -d warehouse -c "SELECT * FROM customers LIMIT 10"
 ```
 
 ## Dependencies
